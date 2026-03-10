@@ -47,7 +47,7 @@ public class FieldOfView : MonoBehaviour
                 }
             }
         }
-        _enemyAI.ChangeState(EnemyState.Patrol);
+        if (_enemyAI.CurrentState == EnemyState.Alert || _enemyAI.CurrentState == EnemyState.Patrol) _enemyAI.ChangeState(EnemyState.Patrol);
     }
     private void OnDrawGizmos()
     {

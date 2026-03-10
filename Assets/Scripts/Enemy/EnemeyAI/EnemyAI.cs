@@ -6,6 +6,10 @@ public class EnemyAI : MonoBehaviour
 {
     [field: SerializeField] public EnemyState CurrentState { get; private set; } = EnemyState.Patrol;
 
+    [SerializeField] private float _alertDuration = 1.5f;
+
+    private float _alertTimer = 0f;
+
     // Update is called once per frame
     void Update()
     {
@@ -29,6 +33,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (CurrentState == newState) return;
         CurrentState = newState;
+        _alertTimer = 0f;
         Debug.Log($"Enemy state changed to {newState}");
     }
 
@@ -40,7 +45,12 @@ public class EnemyAI : MonoBehaviour
 
     private void HandleAlert()
     {
-        // Alert logic here
+        _alertTimer += Time.deltaTime;
+        if (_alertTimer >= _alertDuration)
+        {
+            ChangeState(EnemyState.Chase);
+        }
+
     }
 
     private void HandleChase()

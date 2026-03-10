@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentState == newState) return;
         CurrentState = newState;
+
+        if (newState == GameState.GameOver)
+        {
+            UIManager.Instance.ShowGameOver();
+        }
+
         Debug.Log($"Game state changed to {newState}");
     }
 }

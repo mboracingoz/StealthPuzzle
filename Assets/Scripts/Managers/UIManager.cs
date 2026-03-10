@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private GameObject _levelCompletePanel;
 
 
     void Awake()
@@ -18,12 +19,18 @@ public class UIManager : MonoBehaviour
         }
         Instance = this;
         _gameOverPanel.SetActive(false);
+        _levelCompletePanel.SetActive(false);
     }
 
 
     public void ShowGameOver()
     {
         _gameOverPanel.SetActive(true);
+    }
+
+    public void ShowLevelComplete()
+    {
+        _levelCompletePanel.SetActive(true);
     }
 
 }

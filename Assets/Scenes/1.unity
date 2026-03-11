@@ -1223,6 +1223,21 @@ MonoBehaviour:
     m_Bits: 256
   _hiddenAlpha: 0.4
   _fadeSpeed: 5
+--- !u!114 &649166801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649166792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4682ff5492f74a68b1e92d29c629710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normalRadius: 0
+  _movingRadius: 2
+  _radiusChangeSpeed: 5
 --- !u!1 &841826131
 GameObject:
   m_ObjectHideFlags: 0
@@ -6999,6 +7014,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _playerHide: {fileID: 649166800}
+  _playerFootstep: {fileID: 649166801}
 --- !u!114 &886473165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8095,6 +8111,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6389084303668389501, guid: bdfd2347b908457529f760849d9f9731, type: 3}
       insertIndex: -1
       addedObject: {fileID: 649166800}
+    - targetCorrespondingSourceObject: {fileID: 6389084303668389501, guid: bdfd2347b908457529f760849d9f9731, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 649166801}
   m_SourcePrefab: {fileID: 100100000, guid: bdfd2347b908457529f760849d9f9731, type: 3}
 --- !u!1001 &5988873630937705417
 PrefabInstance:

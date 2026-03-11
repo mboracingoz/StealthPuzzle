@@ -11,6 +11,7 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask _playerMask;
     [SerializeField] private LayerMask _obstacleMask;
     [SerializeField] private PlayerHide _playerHide;
+    [SerializeField] private PlayerFootstep _playerFootstep;
 
     private Vector2 _lastKnownPosition;
     private EnemyAI _enemyAI;
@@ -33,6 +34,18 @@ public class FieldOfView : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _viewRadius, _playerMask);
         Vector3 forward = Quaternion.Euler(0, 0, _viewDirectionOffset) * transform.up;
+
+        if (_playerFootstep.CurrentNoiseRadius > 0f)
+        {
+            float distanceToPlayer = Vector2.Distance(transform.position, _playerFootstep.transform.position);
+            if (distanceToPlayer <= _playerFootstep.CurrentNoiseRadius)
+            {
+                _lastKnownPosition = _playerFootstep.transform.position;
+                _enemyAI.ChangeState(EnemyState.Alert);
+                return;
+            }
+        }
+
 
         foreach (Collider2D hit in hits)
         {

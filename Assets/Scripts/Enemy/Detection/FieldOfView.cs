@@ -10,9 +10,9 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private float _viewDirectionOffset = 0f;
     [SerializeField] private LayerMask _playerMask;
     [SerializeField] private LayerMask _obstacleMask;
+    [SerializeField] private PlayerHide _playerHide;
 
     private Vector2 _lastKnownPosition;
-
     private EnemyAI _enemyAI;
 
     void Awake()
@@ -44,6 +44,8 @@ public class FieldOfView : MonoBehaviour
             {
                 if (!Physics2D.Raycast(transform.position, directionToPlayer, distanceTo, _obstacleMask))
                 {
+                    if (_playerHide.isHiding) return;
+
                     _lastKnownPosition = hit.transform.position;
                     _enemyAI.ChangeState(EnemyState.Alert);
                     return;

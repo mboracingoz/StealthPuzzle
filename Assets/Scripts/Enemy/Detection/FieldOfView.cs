@@ -11,6 +11,8 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask _playerMask;
     [SerializeField] private LayerMask _obstacleMask;
 
+    private Vector2 _lastKnownPosition;
+
     private EnemyAI _enemyAI;
 
     void Awake()
@@ -42,13 +44,29 @@ public class FieldOfView : MonoBehaviour
             {
                 if (!Physics2D.Raycast(transform.position, directionToPlayer, distanceTo, _obstacleMask))
                 {
+                    _lastKnownPosition = hit.transform.position;
                     _enemyAI.ChangeState(EnemyState.Alert);
                     return;
                 }
             }
         }
-        if (_enemyAI.CurrentState == EnemyState.Alert || _enemyAI.CurrentState == EnemyState.Patrol) _enemyAI.ChangeState(EnemyState.Patrol);
+
+
+
+        if (_enemyAI.CurrentState == EnemyState.Chase)
+        {
+            _enemyAI.ChangeState(EnemyState.Search, _lastKnownPosition);
+        }
+        else if (_enemyAI.CurrentState == EnemyState.Alert)
+        {
+            _enemyAI.ChangeState(EnemyState.Search, _lastKnownPosition);
+        }
+        else if (_enemyAI.CurrentState == EnemyState.Patrol)
+        {
+            _enemyAI.ChangeState(EnemyState.Patrol);
+        }
     }
+
     private void OnDrawGizmos()
     {
         Vector3 forward = Quaternion.Euler(0, 0, _viewDirectionOffset) * transform.up;

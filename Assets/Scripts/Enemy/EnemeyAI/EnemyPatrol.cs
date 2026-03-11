@@ -7,6 +7,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] private Transform[] _patrolPoints;
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _wayPointThreshold = 0.15f;
+    [SerializeField] private float _rotationSpeed = 10f;
 
 
     private int _currentPatrolIndex = 0;
@@ -33,8 +34,9 @@ public class EnemyPatrol : MonoBehaviour
         Vector2 dir = (_patrolPoints[_currentPatrolIndex].position - transform.position).normalized;
         _rigidbody2D.velocity = dir * _moveSpeed;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, -angle);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
 
     }
 

@@ -21,15 +21,13 @@ public class DistractionObject : MonoBehaviour
             {
                 EnemyAI enemyAI = hit.GetComponent<EnemyAI>();
                 if (enemyAI != null)
-                {
                     enemyAI.ChangeState(EnemyState.Search, transform.position);
-                }
-
-                Destroy(gameObject);
             }
+
+            Destroy(gameObject);
     }
 
-    private void OawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, _distractionRadius);   

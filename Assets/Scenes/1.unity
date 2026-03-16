@@ -1305,10 +1305,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stonePrefab: {fileID: 1435240397308231007, guid: e16bda94be0b3a0b8b69eaf6ca3a688a, type: 3}
-  _throwForce: 7
+  _throwForce: 18
   _throwPoint: {fileID: 1310659415}
   _maxStones: 3
   _cooldownDuration: 5
+  _trajectoryDotPrefab: {fileID: 1178899624089084799, guid: 29c58f02a3006564bbc4e7a31ad50238, type: 3}
+  _trajectoryDotCount: 10
+  _trajectoryDotSpacing: 0.3
 --- !u!1 &841826131
 GameObject:
   m_ObjectHideFlags: 0

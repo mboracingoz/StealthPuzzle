@@ -32,15 +32,12 @@ public class Chest : MonoBehaviour
             return;
         }
 
-        // ! işareti eksikti
         if (!Input.GetKeyDown(KeyCode.E)) return;
 
         Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _playerLayer);
-        // == null olmalı, != null değil
         if (hit == null) return;
 
         PlayerInventory playerInventory = hit.GetComponent<PlayerInventory>();
-        // == null olmalı
         if (playerInventory == null) return;
 
         if (playerInventory.UseKey())

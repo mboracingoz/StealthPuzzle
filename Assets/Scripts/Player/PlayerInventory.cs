@@ -10,6 +10,7 @@ public class PlayerInventory : MonoBehaviour
    public void AddKey()
     {
         HasKey = true;
+        HUDManager.Instance.UpdateKeyStatus(true);
         Debug.Log("Key added to inventory!");
     }
 
@@ -17,12 +18,14 @@ public class PlayerInventory : MonoBehaviour
     {
         if (!HasKey) return false;
         HasKey = false;
+        HUDManager.Instance.UpdateKeyStatus(false);
         return true;
     }
 
     public void AddMoney()
     {
         HasMoney = true;
+        HUDManager.Instance.UpdateMoneyStatus(true);
         Debug.Log("Money added to inventory!");
     }
 }

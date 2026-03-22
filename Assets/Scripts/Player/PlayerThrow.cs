@@ -28,6 +28,8 @@ public class PlayerThrow : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
         _remainingStones = _maxStones;
 
+        HUDManager.Instance.UpdateStoneCount(_remainingStones);
+
         _trajectoryDots = new GameObject[_trajectoryDotCount];
         for (int i = 0; i < _trajectoryDotCount; i++)
         {
@@ -66,6 +68,8 @@ public class PlayerThrow : MonoBehaviour
         Throw();
         _remainingStones--;
         _cooldownTimer = _cooldownDuration;
+
+        HUDManager.Instance.UpdateStoneCount(_remainingStones);
     }
 
     private void Throw()

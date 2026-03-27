@@ -21,4 +21,16 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void LoadNextScene()
+    {
+        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        
+        if (nextIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            Debug.Log("No More Levels ");
+        }
+
+        SceneManager.LoadScene(nextIndex);
+    }
 }

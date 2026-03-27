@@ -32,7 +32,7 @@ public class Chest : MonoBehaviour
             return;
         }
 
-        if (!Input.GetKeyDown(KeyCode.E)) return;
+        if (!Input.GetKeyDown(KeyCode.E) && !InteractButtonInteractButton.IsPressed) return;
 
         Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _playerLayer);
         if (hit == null) return;

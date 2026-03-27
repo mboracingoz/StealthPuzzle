@@ -22,8 +22,9 @@ public class PlayerThrow : MonoBehaviour
     private float _currentForce = 0f;
     private bool _isCharging = false;
     private GameObject[] _trajectoryDots;
+    private bool _isMobileCharging = false;
 
-    private void Awake()
+    void Start()
     {
         _playerInput = GetComponent<PlayerInput>();
         _remainingStones = _maxStones;
@@ -60,7 +61,13 @@ public class PlayerThrow : MonoBehaviour
             TryThrow();
             _currentForce = 0f;
         }
-    }
+
+        if (_isMobileCharging)
+        {
+            _currentForce = Mathf.MoveTowards(_currentForce, _maxForce, _chargeSpeed * Time.deltaTime);
+            ShowTrajectory();
+        }
+    }   
 
     private void TryThrow()
     {
@@ -78,6 +85,19 @@ public class PlayerThrow : MonoBehaviour
         GameObject stone = Instantiate(_stonePrefab, _throwPoint.position, Quaternion.identity);
         Rigidbody2D rb = stone.GetComponent<Rigidbody2D>();
         rb.AddForce(_lastFacingDirection * force, ForceMode2D.Impulse);
+    }
+
+    public void OnThrowButtonDown()
+    {
+        _isMobileCharging = true;
+    }
+
+    public void OnThrowButtonUp()
+    {
+        _isMobileCharging = false;
+        HideTrajectory();
+        TryThrowMobile();
+        _currentForce = 0f;
     }
 
     private void ShowTrajectory()
@@ -103,5 +123,15 @@ public class PlayerThrow : MonoBehaviour
     {
         foreach (GameObject dot in _trajectoryDots)
             dot.SetActive(false);
+    }
+
+    public void TryThrowMobile()
+    {
+        if(_remainingStones <= 0 || _cooldownTimer > 0f) return;
+        _currentForce = _maxForce;
+        Throw();
+        _remainingStones--;
+        _cooldownTimer = _cooldownDuration;
+        HUDManager.Instance.UpdateStoneCount(_remainingStones);
     }
 }

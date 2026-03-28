@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
 
     public GameState CurrentState { get; private set; } = GameState.Playing;
 
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
                 UIManager.Instance.ShowGameOver();
                 break;
             case GameState.LevelComplete:
+                LevelTİmer.Instance.StopTimer();
                 UIManager.Instance.ShowLevelComplete();
                 break;
             default:

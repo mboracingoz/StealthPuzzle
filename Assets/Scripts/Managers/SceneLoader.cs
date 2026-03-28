@@ -33,4 +33,9 @@ public class SceneLoader : MonoBehaviour
 
         SceneManager.LoadScene(nextIndex);
     }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

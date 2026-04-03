@@ -19,7 +19,7 @@ public class SceneLoader : MonoBehaviour
 
     public void ReloadCurrentScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        FadeManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadNextScene()
@@ -31,11 +31,11 @@ public class SceneLoader : MonoBehaviour
             Debug.Log("No More Levels ");
         }
 
-        SceneManager.LoadScene(nextIndex);
+        FadeManager.Instance.LoadScene(nextIndex);
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(0);
+        FadeManager.Instance.LoadScene(0);
     }
 }
